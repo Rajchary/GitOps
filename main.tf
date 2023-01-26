@@ -10,3 +10,10 @@ module "network" {
   web_security_groups = local.security_groups.webServer
   alb_security_groups = local.security_groups.alb_sg
 }
+
+module "loadbalancing"{
+    source = "./loadbalancer"
+    subnet_ids = module.network.subnet_ids
+    public_sg_id = module.network.albsg_id
+    vpc_id = module.network.vpc_id
+}
