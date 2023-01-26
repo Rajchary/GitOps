@@ -1,9 +1,9 @@
 # LoadBalancing main.tf
 resource "aws_lb" "ekart_alb" {
-  name = "PrimeStore-alb"
-  subnets = var.subnet_ids
+  name            = "PrimeStore-alb"
+  subnets         = var.subnet_ids
   security_groups = [var.public_sg_id]
-  idle_timeout = 400
+  idle_timeout    = 400
 }
 
 resource "aws_lb_target_group" "home_tg" {
@@ -33,18 +33,18 @@ resource "aws_lb_target_group" "products_tg" {
 }
 
 resource "aws_lb_listener" "lb_listener" {
-  load_balancer_arn = "${aws_lb.ekart_alb.arn}"
-  port = 80
-  protocol = "HTTP"
+  load_balancer_arn = aws_lb.ekart_alb.arn
+  port              = 80
+  protocol          = "HTTP"
   default_action {
-    target_group_arn = "${aws_lb_target_group.home_tg.arn}"
-    type = "forward"
+    target_group_arn = aws_lb_target_group.home_tg.arn
+    type             = "forward"
   }
 }
 
 resource "aws_lb_listener_rule" "lr" {
   listener_arn = aws_lb_listener.lb_listener.arn
-  priority = 100
+  priority     = 100
   action {
     type             = "forward"
     target_group_arn = aws_lb_target_group.products_tg.arn
