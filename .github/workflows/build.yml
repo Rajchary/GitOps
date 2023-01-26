@@ -1,1 +1,39 @@
-
+name: Plan and build terraform configuration
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+  workflow_dispatch:
+jobs:
+  build:
+    name: "Terraform"
+    runs-on: ubuntu-latest
+    steps:
+    
+      - name: checkout Repository code
+        uses: actions/checkout@v3
+        
+      - name: HashiCorp - Setup Terraform
+        uses: hashicorp/setup-terraform@v2.0.3
+        with:
+          cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
+          
+      - name: Properly format the code
+        id: fmt
+        run: terraform fmt -check
+        
+      - name: Init the terraform
+        id: init
+        run: terraform init
+        
+      - name: Plan the Terraform configuration
+        id: plan
+        #if: github.eventnam == 'pull_request'
+        run: terraform plan
+        continue-on-error: true
+        
+      - name: Output the plan from previous step
+        run: echo -e "The plan details are :\n ${{ steps.plan.outputs.stdout }}"
+        
+    
