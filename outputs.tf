@@ -1,3 +1,3 @@
 output "alb_endpoint" {
-  value = ""#module.loadbalancing.alb_dns
+  value = module.loadbalancing.alb_dns
 }
