@@ -77,6 +77,8 @@ jobs:
       
       - name: Print output of the configuration
         run: |
+          output= $(terraform output alb_endpoint)
+          echo $output
           echo ${{ steps.apply.outputs.stdout }}
       
         
