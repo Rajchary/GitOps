@@ -31,12 +31,12 @@ module "compute" {
   tg_products_arn        = module.loadbalancing.products_tg_arn
   tg_home_arn            = module.loadbalancing.home_tg_arn
 
-#======> AutoScaling Group Configuration (Stand-By)<======
+  #======> AutoScaling Group Configuration (Stand-By)<======
 
-#   max_instance_size      = var.asg_max_instance_size
-#   min_instance_size      = var.asg_min_instance_size
-#   desired_instance_size  = var.asg_desired_instance_size
-#   asg_name               = var.asg_name
-#   launch_template_name   = var.launch_template_name
+  #   max_instance_size      = var.asg_max_instance_size
+  #   min_instance_size      = var.asg_min_instance_size
+  #   desired_instance_size  = var.asg_desired_instance_size
+  #   asg_name               = var.asg_name
+  #   launch_template_name   = var.launch_template_name
 
 }
