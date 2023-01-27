@@ -25,6 +25,7 @@ jobs:
         uses: hashicorp/setup-terraform@v2.0.3
         with:
           cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
+          terraform_wrapper: false
           
       - name: Properly format the code
         id: fmt
@@ -73,6 +74,10 @@ jobs:
         id: apply
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         run: terraform apply -auto-approve -input=false
+      
+      - name: Print output of the configuration
+        run: |
+          echo ${{ steps.apply.outputs.stdout }}
       
         
         
