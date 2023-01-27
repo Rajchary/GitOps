@@ -75,16 +75,19 @@ jobs:
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         run: terraform apply -auto-approve -input=false
       
-      - name: 'Terraform Output'
-        id: terraform
-        uses: hashicorp/terraform-github-actions@master
+      - name: Get Terraform Cloud Workspace Current State Output
+        # You may pin to the exact commit or the version.
+        # uses: cbsinteractive/get-tfc-workspace-currentstate-output-action@4c7947ac0daa9a0eeb9a408c9bd2d93c71078023
+        uses: cbsinteractive/get-tfc-workspace-currentstate-output-action@1.4.0
         with:
-          tf_actions_version: 0.12.13
-          tf_actions_subcommand: 'output'
-          tf_actions_working_dir: '.'
-      
-      - name: 'Use Terraform Output'
-        run: echo ${{ steps.terraform.outputs.tf_actions_output  }}
+          # A Terraform Cloud API token with access to manage the workspace
+          tfcToken: ${{ secrets.TF_API_TOKEN }}
+          # The name of the Terraform Cloud organization where the workspace resides
+          orgName: "curiositycorp"
+          # The workspace name
+          workspaceName: "test-env"
+          # The output variable name
+          variableName: alb_endpoint
       
         
         
