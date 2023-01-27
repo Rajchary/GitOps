@@ -13,7 +13,7 @@ resource "aws_vpc" "ekart_vpc" {
 
   tags = {
     "Name" = var.vpc_name
-    "Env" = var.env
+    "Env"  = var.env
   }
   lifecycle {
     create_before_destroy = true
@@ -29,13 +29,13 @@ resource "aws_subnet" "ekart_public_subnet" {
 
   tags = {
     "Name" = "PrimeStore_public_subnet_${count.index + 1}"
-    "Env" = var.env
+    "Env"  = var.env
   }
 }
 resource "aws_internet_gateway" "ekart_igw" {
   vpc_id = aws_vpc.ekart_vpc.id
   tags = {
-    Name = "PrimeStore-igw"
+    Name  = "PrimeStore-igw"
     "Env" = var.env
   }
 }
@@ -44,7 +44,7 @@ resource "aws_route_table" "ekart_public_rt" {
   vpc_id = aws_vpc.ekart_vpc.id
   tags = {
     "Name" = "PrimeStore_public_route_table"
-    "Env" = var.env
+    "Env"  = var.env
   }
 }
 

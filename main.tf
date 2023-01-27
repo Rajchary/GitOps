@@ -3,7 +3,7 @@
 
 module "network" {
   source              = "./network"
-  env                 = var.env 
+  env                 = var.env
   vpc_cidrBlock       = var.cidr_block_vpc
   vpc_name            = var.vpc_name
   public_sn_count     = 4
@@ -23,7 +23,7 @@ module "loadbalancing" {
 module "compute" {
   source                 = "./compute"
   env                    = var.env
-  instance_count         = 2
+  instance_count         = var.instance_count
   ami_id                 = var.ami_id
   instance_type          = "t2.micro"
   instance_name          = "Home-app"
@@ -44,3 +44,4 @@ module "compute" {
   #   launch_template_name   = var.launch_template_name
 
 }
+

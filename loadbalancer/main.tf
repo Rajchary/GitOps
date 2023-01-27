@@ -9,7 +9,7 @@ resource "aws_lb" "ekart_alb" {
   tags = {
     "Env" = var.env
   }
-  
+
 }
 
 resource "aws_lb_target_group" "home_tg" {

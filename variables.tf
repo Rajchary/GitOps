@@ -1,8 +1,7 @@
 variable "cidr_block_vpc" {
   type = string
 }
-variable "pub_key" {}
-variable "env"{
+variable "env" {
   default = "Prod"
 }
 variable "vpc_name" {
@@ -16,6 +15,14 @@ variable "webServerDesc" {
   type    = string
   default = "Allows HTTP from Application-load-balancer and SSH from anywhere"
 }
+variable "instance_count" {
+  type    = number
+  default = 1
+}
+variable "repo_name" {
+  default = "Rajchary/GithubActions-Terrafrom-Ansible"
+}
+variable "pub_key" {}
 variable "ami_id" {}
 
 #======> AutoScaling Group Configuration (Stand-By)<======

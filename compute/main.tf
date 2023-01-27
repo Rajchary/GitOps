@@ -9,9 +9,9 @@ resource "aws_instance" "home_app" {
   count         = var.instance_count
   ami           = var.ami_id
   instance_type = var.instance_type
-  key_name = aws_key_pair.primeStore-key-pair.id
+  key_name      = aws_key_pair.primeStore-key-pair.id
   tags = {
-    Name = "${var.instance_name}-${count.index + 1}"
+    Name  = "${var.instance_name}-${count.index + 1}"
     "Env" = var.env
   }
   vpc_security_group_ids = [var.webServer_sg_id]
@@ -24,9 +24,9 @@ resource "aws_instance" "products_app" {
   count         = var.instance_count
   ami           = var.ami_id
   instance_type = var.instance_type
-  key_name = aws_key_pair.primeStore-key-pair.id
+  key_name      = aws_key_pair.primeStore-key-pair.id
   tags = {
-    Name = "Products-app-${count.index + 1}"
+    Name  = "Products-app-${count.index + 1}"
     "Env" = var.env
   }
   vpc_security_group_ids = [var.webServer_sg_id]

@@ -8,7 +8,7 @@ variable "userData_path" {}
 variable "template_userData_path" {}
 variable "tg_products_arn" {}
 variable "tg_home_arn" {}
-variable "public_key"{}
+variable "public_key" {}
 variable "env" {}
 
 #======> AutoScaling Group Configuration (Stand-By)<======
