@@ -75,9 +75,13 @@ jobs:
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         run: terraform apply -auto-approve -input=false
       
-      - name: Print output of the configuration
+      - name: Get outputs
+        uses: dflook/terraform-output@v1
+        id: tf-outputs
+      
+      - name: print-out
         run: |
-          echo ${{ steps.apply.outputs.stdout }}
+          echo " URL is ${{ steps.tf-outputs.outputs.alb_endpoint }}"
       
         
         
