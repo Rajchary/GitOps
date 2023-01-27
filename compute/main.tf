@@ -1,11 +1,18 @@
 # Compute main.tf
 
+resource "aws_key_pair" "primeStore-key-pair" {
+  key_name   = "primeStore-key-pair"
+  public_key = var.public_key
+}
+
 resource "aws_instance" "home_app" {
   count         = var.instance_count
   ami           = var.ami_id
   instance_type = var.instance_type
+  key_name = aws_key_pair.primeStore-key-pair.id
   tags = {
     Name = "${var.instance_name}-${count.index + 1}"
+    "Env" = var.env
   }
   vpc_security_group_ids = [var.webServer_sg_id]
   subnet_id              = var.subnet_ids[count.index]
@@ -17,13 +24,29 @@ resource "aws_instance" "products_app" {
   count         = var.instance_count
   ami           = var.ami_id
   instance_type = var.instance_type
+  key_name = aws_key_pair.primeStore-key-pair.id
   tags = {
-    Name = "${var.instance_name}-${count.index + 1}"
+    Name = "Products-app-${count.index + 1}"
+    "Env" = var.env
   }
   vpc_security_group_ids = [var.webServer_sg_id]
   subnet_id              = var.subnet_ids[count.index]
   user_data              = filebase64(var.template_userData_path)
 
+}
+
+resource "aws_lb_target_group_attachment" "home_tg_attach" {
+  count            = var.instance_count
+  target_group_arn = var.tg_home_arn
+  target_id        = aws_instance.home_app[count.index].id
+  port             = 80
+}
+
+resource "aws_lb_target_group_attachment" "products_tg_attach" {
+  count            = var.instance_count
+  target_group_arn = var.tg_products_arn
+  target_id        = aws_instance.products_app[count.index].id
+  port             = 80
 }
 
 #======> AutoScaling Group Configuration (Stand-By)<======
@@ -65,16 +88,3 @@ resource "aws_instance" "products_app" {
 
 
 #sg- ssh,http https --alb
-resource "aws_lb_target_group_attachment" "home_tg_attach" {
-  count            = var.instance_count
-  target_group_arn = var.tg_home_arn
-  target_id        = aws_instance.home_app[count.index].id
-  port             = 80
-}
-
-resource "aws_lb_target_group_attachment" "products_tg_attach" {
-  count            = var.instance_count
-  target_group_arn = var.tg_products_arn
-  target_id        = aws_instance.products_app[count.index].id
-  port             = 80
-}

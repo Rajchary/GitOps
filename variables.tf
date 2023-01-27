@@ -1,6 +1,10 @@
 variable "cidr_block_vpc" {
   type = string
 }
+variable "pub_key" {}
+variable "env"{
+  default = "Prod"
+}
 variable "vpc_name" {
   type    = string
   default = "PrimeStore_vpc"
@@ -10,7 +14,7 @@ variable "public_sn_cidr" {
 }
 variable "webServerDesc" {
   type    = string
-  default = "Allows HTTP from ALB and SSH for webServers"
+  default = "Allows HTTP from Application-load-balancer and SSH from anywhere"
 }
 variable "ami_id" {}
 

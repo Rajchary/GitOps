@@ -1,7 +1,7 @@
 locals {
   security_groups = {
     webServer = {
-      name        = "WebServerSG"
+      name        = "WebServers"
       description = var.webServerDesc
       ingress = {
         ssh = {
@@ -13,7 +13,7 @@ locals {
       }
     }
     alb_sg = {
-      name        = "AlbSg"
+      name        = "Application-Loadbalancer"
       description = "allows http"
       ingress = {
         http = {

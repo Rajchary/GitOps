@@ -1,4 +1,7 @@
-# network main.tf
+
+# ================>  Network main.tf  <===============#
+
+
 data "aws_availability_zones" "available" {
 
 }
@@ -10,6 +13,7 @@ resource "aws_vpc" "ekart_vpc" {
 
   tags = {
     "Name" = var.vpc_name
+    "Env" = var.env
   }
   lifecycle {
     create_before_destroy = true
@@ -24,20 +28,23 @@ resource "aws_subnet" "ekart_public_subnet" {
   availability_zone       = data.aws_availability_zones.available.names[count.index]
 
   tags = {
-    "Name" = "public_subnet_${count.index + 1}"
+    "Name" = "PrimeStore_public_subnet_${count.index + 1}"
+    "Env" = var.env
   }
 }
 resource "aws_internet_gateway" "ekart_igw" {
   vpc_id = aws_vpc.ekart_vpc.id
   tags = {
-    Name = "ekart-igw"
+    Name = "PrimeStore-igw"
+    "Env" = var.env
   }
 }
 
 resource "aws_route_table" "ekart_public_rt" {
   vpc_id = aws_vpc.ekart_vpc.id
   tags = {
-    "Name" = "PrimeStore_public_rt"
+    "Name" = "PrimeStore_public_route_table"
+    "Env" = var.env
   }
 }
 
@@ -102,11 +109,3 @@ resource "aws_security_group" "ekart_albsg" {
   }
 }
 
-# resource "aws_security_group_rule" "alb_to_server_rule" {
-#   type = "ingress"
-#   from_port = 80
-#   to_port = 80
-#   protocol = "tcp"
-#   source_security_group_id = aws_security_group.ekart_sg["alb_sg"].id
-#   security_group_id = aws_security_group.ekart_sg["webServer"].id
-# }

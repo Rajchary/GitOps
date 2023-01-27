@@ -3,6 +3,7 @@
 
 module "network" {
   source              = "./network"
+  env                 = var.env 
   vpc_cidrBlock       = var.cidr_block_vpc
   vpc_name            = var.vpc_name
   public_sn_count     = 4
@@ -13,6 +14,7 @@ module "network" {
 
 module "loadbalancing" {
   source       = "./loadbalancer"
+  env          = var.env
   subnet_ids   = module.network.subnet_ids
   public_sg_id = module.network.albsg_id
   vpc_id       = module.network.vpc_id
@@ -20,10 +22,12 @@ module "loadbalancing" {
 
 module "compute" {
   source                 = "./compute"
+  env                    = var.env
   instance_count         = 2
   ami_id                 = var.ami_id
   instance_type          = "t2.micro"
-  instance_name          = "HomeApp"
+  instance_name          = "Home-app"
+  public_key             = var.pub_key
   webServer_sg_id        = module.network.websg_id
   subnet_ids             = module.network.subnet_ids
   userData_path          = "${path.root}/userData.sh"

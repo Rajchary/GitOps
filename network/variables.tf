@@ -4,3 +4,4 @@ variable "public_sn_count" {}
 variable "public_sn_cidr" {}
 variable "web_security_groups" {}
 variable "alb_security_groups" {}
+variable "env" {}

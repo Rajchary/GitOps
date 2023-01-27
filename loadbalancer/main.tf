@@ -1,9 +1,15 @@
-# LoadBalancing main.tf
+
+# ================>  LoadBalancer main.tf  <===============#
+
 resource "aws_lb" "ekart_alb" {
   name            = "PrimeStore-alb"
   subnets         = var.subnet_ids
   security_groups = [var.public_sg_id]
   idle_timeout    = 400
+  tags = {
+    "Env" = var.env
+  }
+  
 }
 
 resource "aws_lb_target_group" "home_tg" {
@@ -15,6 +21,9 @@ resource "aws_lb_target_group" "home_tg" {
   lifecycle {
     ignore_changes        = [name]
     create_before_destroy = true
+  }
+  tags = {
+    "Env" = var.env
   }
 }
 
@@ -29,6 +38,9 @@ resource "aws_lb_target_group" "products_tg" {
   lifecycle {
     ignore_changes        = [name]
     create_before_destroy = true
+  }
+  tags = {
+    "Env" = var.env
   }
 }
 
