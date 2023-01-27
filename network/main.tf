@@ -37,7 +37,7 @@ resource "aws_internet_gateway" "ekart_igw" {
 resource "aws_route_table" "ekart_public_rt" {
   vpc_id = aws_vpc.ekart_vpc.id
   tags = {
-    "Name" = "ekart_public_rt"
+    "Name" = "PrimeStore_public_rt"
   }
 }
 
