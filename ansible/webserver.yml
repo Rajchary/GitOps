@@ -1,6 +1,6 @@
 - name: Playbook
   hosts: home_servers,product_servers
-  become: yes
+  become: true
   tasks:
     - name: Ping my hosts
       ansible.builtin.ping:
