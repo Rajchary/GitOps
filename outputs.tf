@@ -8,4 +8,4 @@ output "home_app_ip_address" {
 output "products_app_ip_address" {
   value = module.compute.products_app_ip
 }
-#Adding new feature
+#new changes

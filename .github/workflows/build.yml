@@ -36,7 +36,7 @@ jobs:
         
       - name: Plan the Terraform configuration
         id: plan
-        if: github.eventnam == 'pull_request'
+        if: github.eventname == 'pull_request'
         run: terraform plan
         continue-on-error: true
         
@@ -71,7 +71,7 @@ jobs:
         
       - name: Apply the Terraform configuration
         id: apply
-        if: github.eventnam == 'push' && github.ref == 'refs/heads/main'
+        if: github.eventname == 'push' && github.ref == 'refs/heads/main'
         run: terraform apply -auto-approve -input=false
       
         
