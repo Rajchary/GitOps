@@ -28,7 +28,7 @@ jobs:
         env:
           INVENTORY: ${{ secrets.INVENTORY }}
         run: |
-          'echo "$INVENTORY" > inventory'
+          echo "$INVENTORY" > inventory
           cat inventory
 
       - name: Install SSH key
