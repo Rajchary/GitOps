@@ -11,4 +11,4 @@
     - name: ensure apache is running
       service:
         name: httpd
-        state: started
+        state: started\n
