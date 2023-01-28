@@ -8,4 +8,13 @@ output "home_app_ip_address" {
 output "products_app_ip_address" {
   value = module.compute.products_app_ip
 }
+output "inventory"{
+  value = templatefile(
+    "${path.module}/templates/inventory.tpl",
+    {
+      home_app     = module.compute.home_app_ip,
+      products_app = module.compute.products_app_ip,
+    }
+  )
+}
 #Adding some changes

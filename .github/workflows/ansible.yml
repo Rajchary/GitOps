@@ -43,6 +43,7 @@ jobs:
         env:
           INVENTORY: ${{ secrets.INVENTORY }}
         run: |
+          echo $INVENTORY
           echo "$INVENTORY" > inventory
           cat inventory
 

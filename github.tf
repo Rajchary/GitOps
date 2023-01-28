@@ -17,8 +17,8 @@ resource "github_actions_environment_secret" "inventory" {
   plaintext_value = templatefile(
     "${path.module}/templates/inventory.tpl",
     {
-      home_app     = module.compute.home_app_ip
-      products_app = module.compute.products_app_ip
+      home_app     = module.compute.home_app_ip,
+      products_app = module.compute.products_app_ip,
     }
   )
 }
