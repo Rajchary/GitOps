@@ -16,7 +16,7 @@ resource "aws_instance" "home_app" {
   }
   vpc_security_group_ids = [var.webServer_sg_id]
   subnet_id              = var.subnet_ids[count.index]
-  user_data              = file(var.userData_path)
+  #user_data              = file(var.userData_path)
 
 }
 
@@ -31,7 +31,7 @@ resource "aws_instance" "products_app" {
   }
   vpc_security_group_ids = [var.webServer_sg_id]
   subnet_id              = var.subnet_ids[count.index]
-  user_data              = filebase64(var.template_userData_path)
+  #user_data              = filebase64(var.template_userData_path)
 
 }
 

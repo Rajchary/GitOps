@@ -1,0 +1,9 @@
+- name: Playbook
+  hosts: home_servers
+  become: true
+  tasks:
+    - name: Creating index file 
+      copy: 
+        dest: "/var/www/html/products/index.html"
+        content: |
+          Products App service
