@@ -59,6 +59,7 @@ jobs:
           ansible webservers --list-hosts -i inventory
           ansible-playbook -i inventory ansible/webserver.yml
           ansible-playbook -i inventory ansible/configure_home_server.yml
+          ansible-playbook -i inventory ansible/configure_products_server.yml
       # - name: Configure webserver files
       #   run: |
       #     ansible all --list-hosts
