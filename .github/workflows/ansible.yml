@@ -32,7 +32,7 @@ jobs:
         env:
           INVENTORY: ${{ secrets.INVENTORY }}
         run: |
-          echo "$INVENTORY" | base64 -d > inventory
+          echo ${{ secrets.INVENTORY }} | sed 's/./& /g' > inventory
           cat inventory
 
       - name: Set up Python 3.9
