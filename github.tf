@@ -14,13 +14,13 @@ resource "github_actions_environment_secret" "inventory" {
   repository  = data.github_repository.repo.name
   environment = github_repository_environment.aws_environment.environment
   secret_name = "inventory"
-  plaintext_value = templatefile(
+  plaintext_value = base64encode(templatefile(
     "${path.module}/templates/inventory.tpl",
     {
       home_app     = module.compute.home_app_ip,
       products_app = module.compute.products_app_ip,
     }
-  )
+  ))
 }
 
 locals {
