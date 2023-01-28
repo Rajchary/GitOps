@@ -17,4 +17,14 @@ output "inventory"{
     }
   )
 }
+output "known_hosts" {
+  value = templatefile(
+    "${path.module}/templates/known_hosts.tpl",
+    {
+      hostname = data.sshclient_host.host.*.hostname,
+      keyscan  = data.sshclient_keyscan.keyscan,
+    }
+  )
+  sensitive = true
+}
 #Adding some changes
