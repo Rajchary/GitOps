@@ -1,4 +1,4 @@
-- name: Playbook
+- name: Configure Home
   hosts: home_servers
   become: true
   tasks:

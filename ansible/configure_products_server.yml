@@ -1,5 +1,5 @@
-- name: Playbook
-  hosts: home_servers
+- name: Configure Products
+  hosts: products_servers
   become: true
   tasks:
     - name: Creating index file 
