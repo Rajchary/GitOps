@@ -1,9 +1,10 @@
-name: Checking ansible configuration
+name: Building and configuring webservers
 
 on:
   # push:
   #   branches:
   #     - main
+  
   workflow_dispatch:
 jobs:
   # validate:
