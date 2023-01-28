@@ -26,7 +26,7 @@ module "compute" {
   instance_count         = var.instance_count
   ami_id                 = var.ami_id
   instance_type          = "t2.micro"
-  instance_name          = "Home-app"
+  instance_name          = "Home-App"
   public_key             = var.pub_key
   webServer_sg_id        = module.network.websg_id
   subnet_ids             = module.network.subnet_ids
