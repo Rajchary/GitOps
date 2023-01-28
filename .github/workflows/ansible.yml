@@ -44,7 +44,8 @@ jobs:
           INVENTORY: ${{ secrets.INVENTORY }}
           TEST: ${{ secrets.TF_API_TOKEN }}
         run: |
-          echo $TEST
+          echo $TEST >> test.txt
+          echo test.txt
           echo $INVENTORY
           echo "$INVENTORY" > inventory
           cat inventory
