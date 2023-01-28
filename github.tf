@@ -51,7 +51,4 @@ resource "github_actions_environment_secret" "known_hosts" {
       keyscan  = data.sshclient_keyscan.keyscan,
     }
   )
-  lifecycle {
-    create_before_destroy = true
-  }
 }
