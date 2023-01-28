@@ -2,6 +2,10 @@
   hosts: products_servers
   become: true
   tasks:
+    - name: Creating a new directory
+      file:
+        path: "/var/www/html/products/"
+        state: directory
     - name: Creating index file 
       copy: 
         dest: "/var/www/html/products/index.html"
