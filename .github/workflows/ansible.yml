@@ -54,9 +54,14 @@ jobs:
           known_hosts: ${{ secrets.KNOWN_HOSTS }}
           if_key_exists: fail
 
-      - name: run playbook
+      - name: Configure Apache on webservers
         run: |
           ansible all --list-hosts
           ansible-playbook -i inventory ansible/webserver.yml
+      
+      - name: Configure webserver files
+        run: |
+          ansible all --list-hosts
+          ansible-playbook -i inventory ansible/configure_home_server.yml
           
     
