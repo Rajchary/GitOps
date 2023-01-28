@@ -58,6 +58,5 @@ jobs:
         run: |
           ansible all --list-hosts
           ansible-playbook -i inventory ansible/webserver.yml
-          ansible-playbook -i inventory ansible/configure_home_server.yml
-          ansible-playbook -i inventory ansible/configure_products_server.yml
+          
     
