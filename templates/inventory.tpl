@@ -11,7 +11,7 @@ home_servers:
         
 products_servers:
     hosts:
-        %{ for index, ip in home_app ~}
+        %{ for index, ip in products_app ~}
 
         products-${index}:
             ansible_host: ${ip}

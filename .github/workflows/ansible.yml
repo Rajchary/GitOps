@@ -56,7 +56,7 @@ jobs:
 
       - name: Configure Apache on webservers
         run: |
-          ansible home_servers --list-hosts -i inventory
+          ansible webservers --list-hosts -i inventory
           ansible-playbook -i inventory ansible/webserver.yml
       
       # - name: Configure webserver files
