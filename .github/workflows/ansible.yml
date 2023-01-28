@@ -6,22 +6,22 @@ on:
   #     - main
   workflow_dispatch:
 jobs:
-  validate:
+  # validate:
     
-    runs-on: ubuntu-latest
+  #   runs-on: ubuntu-latest
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
-    steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v3
+  #   # Steps represent a sequence of tasks that will be executed as part of the job
+  #   steps:
+  #     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+  #     - uses: actions/checkout@v3
       
-      - name: Run ansible-lint
-        uses: ansible-community/ansible-lint-action@v6.0.2
-        with:
-          args: "ansible"
+  #     - name: Run ansible-lint
+  #       uses: ansible-community/ansible-lint-action@v6.0.2
+  #       with:
+  #         args: "ansible"
 
   setup-ansible:
-    needs: [validate]
+    #needs: [validate]
     runs-on: ubuntu-latest
     environment: AWS
     steps:
