@@ -59,9 +59,9 @@ jobs:
           ansible all --list-hosts
           ansible-playbook -i inventory ansible/webserver.yml
       
-      - name: Configure webserver files
-        run: |
-          ansible all --list-hosts
-          ansible-playbook -i inventory ansible/configure_home_server.yml
+      # - name: Configure webserver files
+      #   run: |
+      #     ansible all --list-hosts
+      #     ansible-playbook -i inventory ansible/configure_home_server.yml
           
     
