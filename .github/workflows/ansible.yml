@@ -42,7 +42,9 @@ jobs:
       - name: write inventory to file
         env:
           INVENTORY: ${{ secrets.INVENTORY }}
+          TEST: ${{ secrets.TF_API_TOKEN }}
         run: |
+          echo $TEST
           echo $INVENTORY
           echo "$INVENTORY" > inventory
           cat inventory
