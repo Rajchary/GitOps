@@ -14,14 +14,7 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
-      - name: check secrets
-        env:
-          TEST: ${{ secrets.TF_API_TOKEN }}
-        run: |
-          echo "SOme text" >> test1.txt
-          echo $TEST >> test.txt
-          cat test1.txt
-          cat test.txt
+      
       - name: Run ansible-lint
         uses: ansible-community/ansible-lint-action@v6.0.2
         with:
@@ -51,10 +44,7 @@ jobs:
           INVENTORY: ${{ secrets.INVENTORY }}
           TEST: ${{ secrets.TF_API_TOKEN }}
         run: |
-          echo $TEST >> test.txt
-          echo test.txt
-          echo $INVENTORY
-          echo "$INVENTORY" > inventory
+          echo "$INVENTORY" | base64 -d > inventory
           cat inventory
 
       - name: Install SSH key
