@@ -56,5 +56,6 @@ jobs:
 
       - name: run playbook
         run: |
+          ansible all --list-hosts
           ansible-playbook -i inventory ansible/webserver.yml
     
