@@ -1,5 +1,5 @@
 - name: Playbook
-  hosts: home_servers,product_servers
+  hosts: webservers
   become: true
   tasks:
     - name: Ping my hosts
