@@ -17,7 +17,7 @@ variable "webServerDesc" {
 }
 variable "instance_count" {
   type    = number
-  default = 1
+  default = 2
 }
 variable "repo_name" {
   default = "Rajchary/GithubActions-Terrafrom-Ansible"
