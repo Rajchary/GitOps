@@ -6,4 +6,4 @@
       copy: 
         dest: "/var/www/html/index.html"
         content: |
-          This app takes care or app services
+          This app takes care or app services new changes pushed
