@@ -6,4 +6,4 @@
       copy: 
         dest: "/var/www/html/index.html"
         content: |
-          Home App service
+          This app takes care or app services
