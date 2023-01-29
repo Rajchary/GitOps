@@ -6,4 +6,4 @@
       copy: 
         dest: "/var/www/html/index.html"
         content: |
-          Home App service hello home
+          Home app hello home
