@@ -7,4 +7,4 @@
         dest: "/var/www/html/index.html"
         content: |
           <html><center><h1>Home App service
-          Takes Care of home app</h1></center></html>
+          Takes Care of home app and services and other things</h1></center></html>
