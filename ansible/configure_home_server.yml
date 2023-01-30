@@ -6,5 +6,5 @@
       copy: 
         dest: "/var/www/html/index.html"
         content: |
-          <html><center><h1>Products App service
-          Takes Care of products app</h1></center></html>
+          <html><center><h1>Home App service
+          Takes Care of home app</h1></center></html>
