@@ -10,5 +10,5 @@
       copy: 
         dest: "/var/www/html/products/index.html"
         content: |
-          Products App service
-          Takes Care of products app
+          <html><center>Products App service
+          Takes Care of products app</center></html>
