@@ -1,6 +1,5 @@
 name: Building and configuring webservers
 on:
-  workflow_call:
   push:
     branches:
       - main
@@ -11,7 +10,6 @@ jobs:
   Build_Configuration:
     name: "Apply Terraform Configuration"
     runs-on: ubuntu-latest
-    # needs: [Plan_Configuration]
     steps:
 
       - name: Checkout Repo Code
