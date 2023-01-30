@@ -7,4 +7,4 @@
         dest: "/var/www/html/index.html"
         content: |
           Home App service hello home
-          This app takes care or app services new changes pushed
+          This app takes care or app services
