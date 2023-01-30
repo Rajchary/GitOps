@@ -8,3 +8,5 @@ ami_id = "ami-026b57f3c383c2eec"
 # asg_max_instance_size = 4
 # asg_min_instance_size = 1
 # asg_desired_instance_size = 2
+
+#======>        <==========================================
