@@ -1,4 +1,4 @@
-name: Building and configuring webservers
+name: Configuring webservers
 
 on:
   # push:

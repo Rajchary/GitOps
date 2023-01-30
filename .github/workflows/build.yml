@@ -1,4 +1,4 @@
-name: Build Terraform configuration on push
+name: Building and configuring webservers
 on:
   workflow_call:
   push:
