@@ -37,7 +37,6 @@ data "sshclient_host" "host" {
 data "sshclient_keyscan" "keyscan" {
   count     = length(data.sshclient_host.host)
   host_json = data.sshclient_host.host[count.index].json
-
 }
 
 resource "github_actions_environment_secret" "known_hosts" {
