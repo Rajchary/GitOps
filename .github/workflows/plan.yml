@@ -37,7 +37,10 @@ jobs:
           
       - name: Properly format the code
         id: fmt
-        run: terraform fmt
+        run: |
+          cd Terraform
+          pwd
+          terraform fmt
         
       - name: Init the terraform
         id: init
