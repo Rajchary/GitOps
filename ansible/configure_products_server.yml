@@ -6,8 +6,8 @@
       file:
         path: "/var/www/html/products/"
         state: directory
-    - name: Creating index file 
-      copy: 
+    - name: Creating index file
+      copy:
         dest: "/var/www/html/products/index.html"
         content: |
           <html><center><h1>Products App service
