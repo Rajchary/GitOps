@@ -45,9 +45,6 @@ jobs:
         if: github.event_name == 'pull_request'
         run: terraform plan
         continue-on-error: true
-        
-      - name: Output the plan from previous step
-        run: echo -e "The plan details are :\n ${{ steps.plan.outputs.stdout }}"
 
       - name: Terraform Plan Status
         if: steps.plan.outcome == 'failure'
