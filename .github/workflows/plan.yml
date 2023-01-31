@@ -44,12 +44,16 @@ jobs:
         
       - name: Init the terraform
         id: init
-        run: terraform init
+        run: |
+          cd Terraform
+          terraform init
         
       - name: Plan the Terraform configuration
         id: plan
         if: github.event_name == 'pull_request'
-        run: terraform plan
+        run: |
+          cd Terraform
+          terraform plan
         continue-on-error: true
         
       - name: Output the plan from previous step
