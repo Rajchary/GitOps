@@ -51,7 +51,3 @@ resource "github_actions_environment_secret" "known_hosts" {
     }
   )
 }
-
-output "hostnames" {
-  value = data.sshclient_host.host.*.hostname
-}
