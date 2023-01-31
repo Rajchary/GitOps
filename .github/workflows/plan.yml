@@ -20,6 +20,11 @@ jobs:
         run: |
           echo "This event was triggered by the user ${{ github.actor }}"
           echo "The triggered event was ${{ github.event_name }}"
+      
+      - name: Change Directory
+        run: |
+          cd terraform
+          pwd
 
       - name: HashiCorp - Setup Terraform
         uses: hashicorp/setup-terraform@v2.0.3

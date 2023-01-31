@@ -15,6 +15,11 @@ jobs:
       - name: Checkout Repo Code
         uses: actions/checkout@v3
       
+      - name: Change Directory
+        run: |
+          cd terraform
+          pwd
+
       - name: HashiCorp - Setup Terraform
         uses: hashicorp/setup-terraform@v2.0.3
         with:
