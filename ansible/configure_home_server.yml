@@ -2,8 +2,8 @@
   hosts: home_servers
   become: true
   tasks:
-    - name: Creating index file 
-      copy: 
+    - name: Creating index file
+      copy:
         dest: "/var/www/html/index.html"
         content: |
           <html><center><h1>Home App service
