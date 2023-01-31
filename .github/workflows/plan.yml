@@ -25,12 +25,6 @@ jobs:
         run: |
           echo "This event was triggered by the user ${{ github.actor }}"
           echo "The triggered event was ${{ github.event_name }}"
-      
-      # - name: Change Directory
-      #   run: |
-      #     ls
-      #     cd Terraform
-      #     pwd
 
       - name: HashiCorp - Setup Terraform
         uses: hashicorp/setup-terraform@v2.0.3
@@ -40,19 +34,16 @@ jobs:
           
       - name: Properly format the code
         id: fmt
-        run: |
-          terraform fmt
+        run: terraform fmt
         
       - name: Init the terraform
         id: init
-        run: |
-          terraform init
+        run: terraform init
         
       - name: Plan the Terraform configuration
         id: plan
         if: github.event_name == 'pull_request'
-        run: |
-          terraform plan
+        run: terraform plan
         continue-on-error: true
         
       - name: Output the plan from previous step
