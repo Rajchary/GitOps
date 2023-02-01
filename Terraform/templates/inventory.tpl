@@ -6,8 +6,6 @@ home_servers:
         home-${index}:
             ansible_host: ${ip}
             ansible_user: ec2-user
-            
-
         %{ endfor ~}
         
 products_servers:
