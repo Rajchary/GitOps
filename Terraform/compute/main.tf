@@ -1,37 +1,38 @@
-# Compute main.tf
+
+# ================>  Compute main.tf  <===============#
 
 resource "aws_key_pair" "primeStore-key-pair" {
-  key_name   = "primeStore-key-pair"
+  key_name   = var.key_pair_name
   public_key = var.public_key
 }
 
 resource "aws_instance" "home_app" {
+
   count         = var.instance_count
   ami           = var.ami_id
   instance_type = var.instance_type
   key_name      = aws_key_pair.primeStore-key-pair.id
   tags = {
-    Name  = "${var.instance_name}-${count.index + 1}"
+    Name  = "${var.instance_names.Home_App}-${count.index + 1}"
     "Env" = var.env
   }
   vpc_security_group_ids = [var.webServer_sg_id]
   subnet_id              = var.subnet_ids[count.index]
-  #user_data              = file(var.userData_path)
 
 }
 
 resource "aws_instance" "products_app" {
+
   count         = var.instance_count
   ami           = var.ami_id
   instance_type = var.instance_type
   key_name      = aws_key_pair.primeStore-key-pair.id
   tags = {
-    Name  = "Products-app-${count.index + 1}"
+    Name  = "${var.instance_names.Products_App}-${count.index + 1}"
     "Env" = var.env
   }
   vpc_security_group_ids = [var.webServer_sg_id]
   subnet_id              = var.subnet_ids[count.index]
-  #user_data              = filebase64(var.template_userData_path)
 
 }
 
@@ -86,5 +87,3 @@ resource "aws_lb_target_group_attachment" "products_tg_attach" {
 #   }
 # }
 
-
-#sg- ssh,http https --alb
