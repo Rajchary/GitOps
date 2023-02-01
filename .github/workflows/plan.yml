@@ -1,5 +1,5 @@
 
-name: Planning the configuration for terraform PR
+name: Planning and lint checking for PR
 
 on:
   pull_request:
