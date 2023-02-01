@@ -1,5 +1,5 @@
 # GithubActions-Terrafrom
-![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/Rajchary/GitOps/plan.yml?label=Apply-build)   ![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/Rajchary/GitOps/plan.yml?label=plan-build)   ![GitHub](https://img.shields.io/github/license/Rajchary/GitOps)   ![GitHub last commit](https://img.shields.io/github/last-commit/rajchary/gitops)
+![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/Rajchary/GitOps/plan.yml?label=Apply-build)   ![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/Rajchary/GitOps/plan.yml?label=plan-build)   ![GitHub](https://img.shields.io/github/license/Rajchary/Gitops?color=blueviolet)   ![GitHub last commit](https://img.shields.io/github/last-commit/rajchary/gitops?color=blueviolet)  ![GitHub commit activity](https://img.shields.io/github/commit-activity/y/Rajchary/Gitops?color=blueviolet)
 > ***
 > ### Description
 Simple project to demonstrate the Continues Integration and Deployement(CI/CD) pipeline of an Application/Service. Basically we will automate the workflow using github actions which will be triggered by the events{PUSH//PULL}.
