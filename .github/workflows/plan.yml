@@ -1,5 +1,5 @@
 
-name: Planning the configuration for terraform PR
+name: Planning and lint checking for PR
 
 on:
   pull_request:
@@ -27,15 +27,28 @@ jobs:
           echo "The triggered event was ${{ github.event_name }}"
           echo "The ref is ${{ github.ref }} "
 
+      - name: Config Terraform plugin cache
+        run: |
+          echo 'plugin_cache_dir="$HOME/.terraform.d/plugin-cache"' >~/.terraformrc
+          mkdir --parents ~/.terraform.d/plugin-cache
+
+      - name: Cache Terraform
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.terraform.d/plugin-cache
+          key: ${{ runner.os }}-terraform-${{ hashFiles('**/.terraform.lock.hcl') }}
+          restore-keys: |
+            ${{ runner.os }}-terraform-
+
       - name: HashiCorp - Setup Terraform
         uses: hashicorp/setup-terraform@v2.0.3
         with:
           cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
-          terraform_wrapper: false
           
       - name: Properly format the code
         id: fmt
-        run: terraform fmt
+        run: terraform fmt -recursive
         
       - name: Init the terraform
         id: init
