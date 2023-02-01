@@ -27,12 +27,6 @@ jobs:
           echo "The triggered event was ${{ github.event_name }}"
           echo "The ref is ${{ github.ref }} "
 
-      - name: HashiCorp - Setup Terraform
-        uses: hashicorp/setup-terraform@v2.0.3
-        with:
-          cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
-          terraform_wrapper: false
-
       - name: Config Terraform plugin cache
         run: |
           echo 'plugin_cache_dir="$HOME/.terraform.d/plugin-cache"' >~/.terraformrc
@@ -44,7 +38,15 @@ jobs:
             ~/.terraform.d/plugin-cache
           key: ${{ runner.os }}-terraform-${{ hashFiles('**/.terraform.lock.hcl') }}
           restore-keys: |
-            ${{ runner.os }}-terraform-    
+            ${{ runner.os }}-terraform-
+
+      - name: HashiCorp - Setup Terraform
+        uses: hashicorp/setup-terraform@v2.0.3
+        with:
+          cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
+          terraform_wrapper: false
+
+          
       - name: Properly format the code
         id: fmt
         run: terraform fmt -recursive
