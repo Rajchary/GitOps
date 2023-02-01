@@ -19,7 +19,6 @@ terraform {
 
   cloud {
     organization = "curiositycorp"
-
     workspaces {
       name = "test-env"
     }
@@ -28,10 +27,6 @@ terraform {
 provider "aws" {
   region = "us-east-1"
 }
-provider "github" {
+provider "github" {}
 
-}
-
-provider "sshclient" {
-
-}
+provider "sshclient" {}

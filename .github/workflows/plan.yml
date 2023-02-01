@@ -15,7 +15,8 @@ jobs:
       run:
         working-directory: Terraform
     steps:
-    
+      - name: Check current ref
+        run: echo ${{ github.ref }}
       - name: checkout Repository code
         uses: actions/checkout@v3
         with:

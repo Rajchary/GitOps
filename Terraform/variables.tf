@@ -11,6 +11,9 @@ variable "vpc_name" {
 variable "public_sn_cidr" {
   type = list(any)
 }
+variable "public_sn_count" {
+  default = 4
+}
 variable "webServerDesc" {
   type    = string
   default = "Allows HTTP from Application-load-balancer and SSH from anywhere"
@@ -22,6 +25,20 @@ variable "instance_count" {
 variable "repo_name" {
   default = "Rajchary/GithubActions-Terrafrom-Ansible"
 }
+variable "key_pair_name" {
+  default = "primeStore-key-pair"
+}
+variable "instance_type" {
+  default = "t2.micro"
+}
+variable "instance_names" {
+  type = map(any)
+  default = {
+    "Home_App" : "Home-app"
+    "Products_App" : "Products-app"
+  }
+}
+
 variable "pub_key" {}
 variable "ami_id" {}
 

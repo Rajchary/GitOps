@@ -1,6 +1,4 @@
 
-
-
 data "github_repository" "repo" {
   full_name = var.repo_name
 }
