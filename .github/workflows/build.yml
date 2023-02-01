@@ -1,4 +1,4 @@
-name: Building and configuring webservers
+name: Building and Configuring webservers
 on:
   push:
     branches:
