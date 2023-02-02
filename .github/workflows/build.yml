@@ -78,6 +78,3 @@ jobs:
       - name: Configure webserver files
         run: |
           ansible-playbook -i inventory ansible/configure_products_server.yml
-
-
-      
