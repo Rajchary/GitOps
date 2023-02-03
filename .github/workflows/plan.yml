@@ -106,7 +106,7 @@ jobs:
 
       - name: Configure Apache on webservers
         run: |
-          ansible --version
+          export ANSIBLE_HOST_KEY_CHECKING=False;
           ansible webservers --list-hosts -i inventory
           sudo ansible -i inventory --private-key privateKey.pem -m ping all
         ##ansible-playbook -i inventory --private-key privateKey.pem ansible/webserver.yml
