@@ -79,13 +79,20 @@ jobs:
           echo ${{ secrets.PRIVATE_KEY }} | base64 -d > privateKey
           cat inventory
           cat privateKey
-          sudo chmod 400 privateKey
+          sudo chmod 600 privateKey
       - name: Set up Python 3.9
         uses: actions/setup-python@v2
         with:
           python-version: 3.9
           cache: 'pip'
-
+      - name: cache pip
+        uses: actions/cache@v2
+        with:
+          path: ~/.cache/pip #/opt/hostedtoolcache/Python/3.9.16/x64/lib/python3.9/site-packages
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+            
       - name: Install dependencies Including Ansible
         run: |
           python -m pip install --upgrade pip
