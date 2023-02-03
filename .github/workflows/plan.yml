@@ -80,21 +80,18 @@ jobs:
           cat inventory
           cat privateKey
           sudo chmod 600 privateKey
+
       - name: Set up Python 3.9
         uses: actions/setup-python@v2
         with:
           python-version: 3.9
           cache: 'pip'
-      # - name: Get pip cache dir
-      #   id: pip-cache
-      #   run: |
-      #     echo "dir=$(pip cache dir)" >> $GITHUB_OUTPUT
 
       - name: cache pip
         id: cache_pip
         uses: actions/cache@v3
         with:
-          path: ~/.cache/pip #/opt/hostedtoolcache/Python/3.9.16/x64/lib/python3.9/site-packages
+          path: ~/.cache/pip
           key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
           restore-keys: |
             ${{ runner.os }}-pip-
@@ -108,6 +105,7 @@ jobs:
       - name: Configure Apache on webservers
         run: |
           export ANSIBLE_HOST_KEY_CHECKING=False;
+          ansible webservers - inventory -m ping --private-key privateKey
           ansible webservers --list-hosts -i inventory
         ##ansible-playbook -i inventory --private-key privateKey ansible/webserver.yml
 
