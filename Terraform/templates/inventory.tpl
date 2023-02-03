@@ -6,7 +6,7 @@ home_servers:
         home-${index}:
             ansible_host: ${ip}
             ansible_user: ec2-user
-            ansible_ssh_private_key_file: privateKey
+            ansible_ssh_private_key_file: /home/runner/.ssh/privateKey
         %{ endfor ~}
         
 products_servers:
@@ -16,7 +16,7 @@ products_servers:
         products-${index}:
             ansible_host: ${ip}
             ansible_user: ec2-user
-            ansible_ssh_private_key_file: privateKey
+            ansible_ssh_private_key_file: /home/runner/.ssh/privateKey
         %{ endfor ~}
 
 webservers:

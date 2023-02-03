@@ -81,7 +81,7 @@ jobs:
           
           mkdir -p /home/runner/.ssh/
           echo ${{ secrets.PRIVATE_KEY }} | base64 -d > /home/runner/.ssh/privateKey
-          sudo chmod 700 /home/runner/.ssh/privateKey
+          sudo chmod 400 /home/runner/.ssh/privateKey
           
           sudo apt update -y
           service ssh status
@@ -113,7 +113,6 @@ jobs:
         run: |
           export ANSIBLE_HOST_KEY_CHECKING=False;
           ansible webservers --list-hosts -i inventory.yml
-          cat /home/runner/.ssh/privateKey
           ansible -i inventory.yml --private-key /home/runner/.ssh/privateKey -m ping all -vvv
         ##ansible-playbook -i inventory --private-key privateKey.pem ansible/webserver.yml
         #echo -e "[defaults]\nhost_key_checking = False\ninventory=inventory\nremote-user 
