@@ -75,15 +75,19 @@ jobs:
           ref: feature
       - name: write inventory to file
         run: |
-          echo ${{ secrets.INVENTORY }} | base64 -d > inventory
-          echo ${{ secrets.PRIVATE_KEY }} | base64 -d > privateKey
+          echo ${{ secrets.INVENTORY }} | base64 -d > inventory.yml
           
-          cat inventory
-          sudo chmod 400 privateKey
+          cat inventory.yml
+          eval `ssh-agent -s`
+          mkdir -p /home/runner/.ssh/
+          echo ${{ secrets.PRIVATE_KEY }} | base64 -d > /home/runner/.ssh/privateKey
+          sudo chmod 700 /home/runner/.ssh/privateKey
+          ssh-keyscan -t rsa,dsa,ecdsa,ed25519 ${{secrets.KNOWN_HOSTS}} >> /home/runner/.ssh/known_hosts
           sudo apt update -y
-          sudo apt install software-properties-common
-          sudo add-apt-repository --yes --update ppa:ansible/ansible
-          sudo apt install ansible
+          service ssh status
+        # sudo apt install software-properties-common
+        # sudo add-apt-repository --yes --update ppa:ansible/ansible
+        # sudo apt install ansible
       # - name: Set up Python 3.9
       #   uses: actions/setup-python@v2
       #   with:
