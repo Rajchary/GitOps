@@ -76,10 +76,11 @@ jobs:
       - name: write inventory to file
         run: |
           echo ${{ secrets.INVENTORY }} | base64 -d > inventory
-          echo ${{ secrets.PRIVATE_KEY }} | base64 -d > privateKey
+          echo ${{ secrets.PRIVATE_KEY }} | base64 -d > privateKey.pem
           cat inventory
-          cat privateKey
-          sudo chmod 600 privateKey
+          echo "SPACE"
+          cat privateKey.pem
+          sudo chmod 400 privateKey.pem
 
       - name: Set up Python 3.9
         uses: actions/setup-python@v2
@@ -105,9 +106,9 @@ jobs:
       - name: Configure Apache on webservers
         run: |
           export ANSIBLE_HOST_KEY_CHECKING=False;
-          ansible webservers -i inventory -m ping --private-key privateKey
+          ansible webservers -i inventory -m ping --private-key privateKey.pem
           ansible webservers --list-hosts -i inventory
-        ##ansible-playbook -i inventory --private-key privateKey ansible/webserver.yml
+        ##ansible-playbook -i inventory --private-key privateKey.pem ansible/webserver.yml
 
   # validate_ansible:
   #   runs-on: ubuntu-latest
