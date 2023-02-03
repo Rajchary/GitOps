@@ -109,7 +109,7 @@ jobs:
         run: |
           export ANSIBLE_HOST_KEY_CHECKING=False;
           ansible webservers --list-hosts -i inventory
-          sudo ansible -i inventory --private-key privateKey.pem -m ping all
+          sudo ansible -i inventory --private-key privateKey.pem -m ping all -vvv
         ##ansible-playbook -i inventory --private-key privateKey.pem ansible/webserver.yml
         #export ANSIBLE_HOST_KEY_CHECKING=False;
   # validate_ansible:
