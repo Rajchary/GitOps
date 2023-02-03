@@ -85,11 +85,15 @@ jobs:
         with:
           python-version: 3.9
           cache: 'pip'
-          
+      - name: Get pip cache dir
+        id: pip-cache
+        run: |
+          echo "dir=$(pip cache dir)" >> $GITHUB_OUTPUT
+
       - name: cache pip
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
-          path: ~/.cache/pip #/opt/hostedtoolcache/Python/3.9.16/x64/lib/python3.9/site-packages
+          path: ${{ steps.pip-cache.outputs.dir }} #/opt/hostedtoolcache/Python/3.9.16/x64/lib/python3.9/site-packages
           key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
           restore-keys: |
             ${{ runner.os }}-pip-
