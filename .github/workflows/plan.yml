@@ -82,7 +82,7 @@ jobs:
           mkdir -p /home/runner/.ssh/
           echo ${{ secrets.PRIVATE_KEY }} | base64 -d > /home/runner/.ssh/privateKey
           sudo chmod 400 /home/runner/.ssh/privateKey
-          
+          sudo chmod 700 /home/runner/.ssh
           sudo apt update -y
           service ssh status
         # sudo apt install software-properties-common
