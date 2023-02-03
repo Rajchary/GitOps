@@ -81,8 +81,7 @@ jobs:
           echo "SPACE"
           cat privateKey.pem
           sudo chmod 400 privateKey.pem
-          sudo apt update -y
-          sudo apt install ansible -y
+          
       - name: Set up Python 3.9
         uses: actions/setup-python@v2
         with:
@@ -108,7 +107,7 @@ jobs:
         run: |
           export ANSIBLE_HOST_KEY_CHECKING=False;
           ansible webservers --list-hosts -i inventory
-          ansible -i inventory -m ping all
+          sudo ansible -i inventory -m ping all
         ##ansible-playbook -i inventory --private-key privateKey.pem ansible/webserver.yml
         #export ANSIBLE_HOST_KEY_CHECKING=False;
   # validate_ansible:
