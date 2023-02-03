@@ -105,7 +105,7 @@ jobs:
       - name: Configure Apache on webservers
         run: |
           export ANSIBLE_HOST_KEY_CHECKING=False;
-          ansible webservers - inventory -m ping --private-key privateKey
+          ansible webservers -i inventory -m ping --private-key privateKey
           ansible webservers --list-hosts -i inventory
         ##ansible-playbook -i inventory --private-key privateKey ansible/webserver.yml
 
