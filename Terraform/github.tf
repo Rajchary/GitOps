@@ -41,11 +41,11 @@ resource "github_actions_environment_secret" "known_hosts" {
   repository  = data.github_repository.repo.name
   environment = github_repository_environment.aws_environment.environment
   secret_name = "known_hosts"
-  plaintext_value = templatefile(
+  plaintext_value = base64encode(templatefile(
     "${path.module}/templates/known_hosts.tpl",
     {
       hostname = data.sshclient_host.host.*.hostname,
       keyscan  = data.sshclient_keyscan.keyscan,
     }
-  )
+  ))
 }
