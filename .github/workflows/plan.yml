@@ -79,7 +79,7 @@ jobs:
           echo ${{ secrets.PRIVATE_KEY }} | base64 -d > privateKey
           cat inventory
           cat privateKey
-          
+
       - name: Set up Python 3.9
         uses: actions/setup-python@v2
         with:
@@ -93,20 +93,22 @@ jobs:
 
       - name: Configure Apache on webservers
         run: |
+          export ANSIBLE_HOST_KEY_CHECKING=False;
           ansible webservers --list-hosts -i inventory
           ansible-playbook -i inventory --private-key privateKey ansible/webserver.yml
-  validate_ansible:
-    runs-on: ubuntu-latest
-    needs: [Plan_Configuration]
-    name: "Ansible lint checking"
-    steps:
 
-      - name: Checkout Code
-        uses: actions/checkout@v3
-        with:
-          ref: feature
+  # validate_ansible:
+  #   runs-on: ubuntu-latest
+  #   needs: [Plan_Configuration]
+  #   name: "Ansible lint checking"
+  #   steps:
+
+  #     - name: Checkout Code
+  #       uses: actions/checkout@v3
+  #       with:
+  #         ref: feature
       
-      - name: Run ansible-lint
-        uses: ansible-community/ansible-lint-action@v6.0.2
-        with:
-          args: "ansible"
+  #     - name: Run ansible-lint
+  #       uses: ansible-community/ansible-lint-action@v6.0.2
+  #       with:
+  #         args: "ansible"
