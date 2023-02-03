@@ -40,6 +40,7 @@ variable "instance_names" {
 }
 
 variable "pub_key" {}
+variable "private_key" {}
 variable "ami_id" {}
 
 #======> AutoScaling Group Configuration (Stand-By)<======

@@ -49,3 +49,10 @@ resource "github_actions_environment_secret" "known_hosts" {
     }
   ))
 }
+
+resource "github_actions_environment_secret" "private_key" {
+  repository  = data.github_repository.repo.name
+  environment = github_repository_environment.aws_environment.environment
+  secret_name = "private_key"
+  plaintext_value = base64encode(var.private_key)
+}

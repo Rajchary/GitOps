@@ -76,9 +76,10 @@ jobs:
       - name: write inventory to file
         run: |
           echo ${{ secrets.INVENTORY }} | base64 -d > inventory
-          echo ${{ secrets.PRIVATE_KEY }} > privateKey
+          echo ${{ secrets.PRIVATE_KEY }} | base64 -d > privateKey
           cat inventory
-        
+          cat privateKey
+          
       - name: Set up Python 3.9
         uses: actions/setup-python@v2
         with:
