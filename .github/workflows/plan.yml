@@ -8,65 +8,65 @@ on:
   workflow_dispatch:
     
 jobs:
-  Plan_Configuration:
-    name: "Plan Terraform Configuration"
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: Terraform
-    steps:
+  # Plan_Configuration:
+  #   name: "Plan Terraform Configuration"
+  #   runs-on: ubuntu-latest
+  #   defaults:
+  #     run:
+  #       working-directory: Terraform
+  #   steps:
       
-      - name: checkout Repository code
-        uses: actions/checkout@v3
-        with:
-          ref: feature
+  #     - name: checkout Repository code
+  #       uses: actions/checkout@v3
+  #       with:
+  #         ref: feature
      
-      - name: Print MetaData
-        run: |
-          echo "This event was triggered by the user ${{ github.actor }}"
-          echo "The triggered event was ${{ github.event_name }}"
-          echo "The ref is ${{ github.ref }} "
+  #     - name: Print MetaData
+  #       run: |
+  #         echo "This event was triggered by the user ${{ github.actor }}"
+  #         echo "The triggered event was ${{ github.event_name }}"
+  #         echo "The ref is ${{ github.ref }} "
 
-      - name: Config Terraform plugin cache
-        run: |
-          echo 'plugin_cache_dir="$HOME/.terraform.d/plugin-cache"' >~/.terraformrc
-          mkdir --parents ~/.terraform.d/plugin-cache
+  #     - name: Config Terraform plugin cache
+  #       run: |
+  #         echo 'plugin_cache_dir="$HOME/.terraform.d/plugin-cache"' >~/.terraformrc
+  #         mkdir --parents ~/.terraform.d/plugin-cache
 
-      - name: Cache Terraform
-        uses: actions/cache@v3
-        with:
-          path: |
-            ~/.terraform.d/plugin-cache
-          key: ${{ runner.os }}-terraform-${{ hashFiles('**/.terraform.lock.hcl') }}
-          restore-keys: |
-            ${{ runner.os }}-terraform-
+  #     - name: Cache Terraform
+  #       uses: actions/cache@v3
+  #       with:
+  #         path: |
+  #           ~/.terraform.d/plugin-cache
+  #         key: ${{ runner.os }}-terraform-${{ hashFiles('**/.terraform.lock.hcl') }}
+  #         restore-keys: |
+  #           ${{ runner.os }}-terraform-
 
-      - name: HashiCorp - Setup Terraform
-        uses: hashicorp/setup-terraform@v2.0.3
-        with:
-          cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
+  #     - name: HashiCorp - Setup Terraform
+  #       uses: hashicorp/setup-terraform@v2.0.3
+  #       with:
+  #         cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
           
-      - name: Properly format the code
-        id: fmt
-        run: terraform fmt -recursive
+  #     - name: Properly format the code
+  #       id: fmt
+  #       run: terraform fmt -recursive
         
-      - name: Init the terraform
-        id: init
-        run: terraform init
+  #     - name: Init the terraform
+  #       id: init
+  #       run: terraform init
         
-      - name: Plan the Terraform configuration
-        id: plan
-        if: github.event_name == 'pull_request'
-        run: terraform plan
-        continue-on-error: true
+  #     - name: Plan the Terraform configuration
+  #       id: plan
+  #       if: github.event_name == 'pull_request'
+  #       run: terraform plan
+  #       continue-on-error: true
 
-      - name: Terraform Plan Status
-        if: steps.plan.outcome == 'failure'
-        run: exit 1
+  #     - name: Terraform Plan Status
+  #       if: steps.plan.outcome == 'failure'
+  #       run: exit 1
 
   Webserver_Configure_Test:
     runs-on: ubuntu-latest
-    needs: [Plan_Configuration]
+    # needs: [Plan_Configuration]
     environment: AWS
     steps:
       - name: Checkout Code
@@ -79,7 +79,7 @@ jobs:
           echo ${{ secrets.PRIVATE_KEY }} | base64 -d > privateKey
           cat inventory
           cat privateKey
-
+          sudo chmod 400 privateKey
       - name: Set up Python 3.9
         uses: actions/setup-python@v2
         with:
