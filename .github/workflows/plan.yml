@@ -81,27 +81,28 @@ jobs:
           echo "SPACE"
           cat privateKey.pem
           sudo chmod 400 privateKey.pem
-          
-      - name: Set up Python 3.9
-        uses: actions/setup-python@v2
-        with:
-          python-version: 3.9
-          cache: 'pip'
+          sudo apt update -y
+          sudo apt install ansible -y
+      # - name: Set up Python 3.9
+      #   uses: actions/setup-python@v2
+      #   with:
+      #     python-version: 3.9
+      #     cache: 'pip'
 
-      - name: cache pip
-        id: cache_pip
-        uses: actions/cache@v3
-        with:
-          path: ~/.cache/pip
-          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
-          restore-keys: |
-            ${{ runner.os }}-pip-
+      # - name: cache pip
+      #   id: cache_pip
+      #   uses: actions/cache@v3
+      #   with:
+      #     path: ~/.cache/pip
+      #     key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+      #     restore-keys: |
+      #       ${{ runner.os }}-pip-
 
-      - name: Install dependencies Including Ansible
-        if: steps.cache_pip.outputs.cache-hit != 'true'
-        run: |
-          python -m pip install --upgrade pip
-          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+      # - name: Install dependencies Including Ansible
+      #   if: steps.cache_pip.outputs.cache-hit != 'true'
+      #   run: |
+      #     python -m pip install --upgrade pip
+      #     if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
       - name: Configure Apache on webservers
         run: |
