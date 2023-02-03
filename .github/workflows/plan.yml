@@ -76,12 +76,12 @@ jobs:
       - name: write inventory to file
         run: |
           echo ${{ secrets.INVENTORY }} | base64 -d > inventory
-          echo ${{ secrets.PRIVATE_KEY }} | base64 -d > privateKey.pem
-          echo -e "[defaults]\nhost_key_checking = False\ninventory=inventory\nremote-user = ec2-user\nprivate_key_file = privateKey.pem" > ansible.cfg
+          echo ${{ secrets.PRIVATE_KEY }} | base64 -d > privateKey
+          echo -e "[defaults]\nhost_key_checking = False\ninventory=inventory\nremote-user = ec2-user\nprivate_key_file = privateKey" > ansible.cfg
           cat inventory
           echo "SPACE"
-          cat privateKey.pem
-          sudo chmod 400 privateKey.pem
+          cat privateKey
+          sudo chmod 400 privateKey
           sudo apt update -y
           sudo apt install ansible -y
       # - name: Set up Python 3.9
@@ -107,9 +107,9 @@ jobs:
 
       - name: Configure Apache on webservers
         run: |
-          export ANSIBLE_HOST_KEY_CHECKING=False;
+          cat ansible.cfg
           ansible webservers --list-hosts -i inventory
-          sudo ansible -i inventory --private-key privateKey.pem -m ping all -vvv
+          sudo ansible -i inventory --private-key privateKey.pem -m ping all -vvvv
         ##ansible-playbook -i inventory --private-key privateKey.pem ansible/webserver.yml
         #export ANSIBLE_HOST_KEY_CHECKING=False;
   # validate_ansible:
