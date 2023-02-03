@@ -109,6 +109,7 @@ jobs:
         run: |
           export ANSIBLE_HOST_KEY_CHECKING=False;
           ansible webservers --list-hosts -i inventory
+          ssh -i privateKey ec2-user@50.19.172.39
           ansible -i inventory --private-key privateKey -m ping all -vvv
         ##ansible-playbook -i inventory --private-key privateKey.pem ansible/webserver.yml
         #echo -e "[defaults]\nhost_key_checking = False\ninventory=inventory\nremote-user 
