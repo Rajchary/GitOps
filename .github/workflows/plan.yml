@@ -79,11 +79,9 @@ jobs:
           echo ${{ secrets.PRIVATE_KEY }} | base64 -d > privateKey
           
           cat inventory
-          echo "SPACE"
-          cat privateKey
           sudo chmod 400 privateKey
           sudo apt update -y
-          sudo apt install ansible=2.13.7 -y
+          sudo apt install ansible=6.7.0 -y
       # - name: Set up Python 3.9
       #   uses: actions/setup-python@v2
       #   with:
