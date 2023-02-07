@@ -45,7 +45,6 @@ jobs:
         
       - name: Init the terraform
         id: init
-        if: steps.cache_terraform.outputs.cache-hit != 'true'
         run: terraform init
         
       - name: Apply the Terraform configuration
