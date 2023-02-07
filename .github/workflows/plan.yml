@@ -15,7 +15,7 @@ jobs:
       run:
         working-directory: Terraform
     steps:
-      
+
       - name: checkout Repository code
         uses: actions/checkout@v3
         with:
@@ -44,6 +44,8 @@ jobs:
 
       - name: HashiCorp - Setup Terraform
         uses: hashicorp/setup-terraform@v2.0.3
+        env:
+          TF_CLI_CONFIG_FILE: ${{ github.workspace }}/.terraformrc
         with:
           cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
           
