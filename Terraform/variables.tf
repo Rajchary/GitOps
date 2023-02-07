@@ -42,7 +42,7 @@ variable "instance_names" {
 variable "pub_key" {}
 variable "ami_id" {}
 
-#======> AutoScaling Group Configuration (Stand-By)<======
+#======> AutoScaling Group Configuration (Stand-By) <======
 
 # variable asg_max_instance_size{}
 # variable asg_min_instance_size{}
