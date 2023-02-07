@@ -33,6 +33,7 @@ jobs:
           mkdir --parents ~/.terraform.d/plugin-cache
 
       - name: Cache Terraform
+        id: cache_terraform
         uses: actions/cache@v3
         with:
           path: |
@@ -52,6 +53,7 @@ jobs:
         
       - name: Init the terraform
         id: init
+        if: steps.cache_terraform.outputs.cache-hit != 'true'
         run: terraform init
         
       - name: Plan the Terraform configuration
