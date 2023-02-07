@@ -6,7 +6,6 @@ home_servers:
         home-${index}:
             ansible_host: ${ip}
             ansible_user: ec2-user
-            ansible_ssh_private_key_file: primeStore
         %{ endfor ~}
         
 products_servers:
@@ -16,7 +15,6 @@ products_servers:
         products-${index}:
             ansible_host: ${ip}
             ansible_user: ec2-user
-            ansible_ssh_private_key_file: primeStore
         %{ endfor ~}
 
 webservers:
