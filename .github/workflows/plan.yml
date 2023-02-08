@@ -29,7 +29,7 @@ jobs:
 
       - name: Config Terraform plugin cache
         env:
-          TF_API_TOKEN = ${{ secrets.TF_API_TOKEN }}
+          TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
         run: |
           sudo chmod +x ./scripts/terraformConfig.sh
           ./scripts/terraformConfig.sh
