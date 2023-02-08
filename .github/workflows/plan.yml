@@ -28,9 +28,12 @@ jobs:
           echo "The ref is ${{ github.ref }} "
 
       - name: Config Terraform plugin cache
+        env:
+          TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
         run: |
-          echo 'plugin_cache_dir="$HOME/.terraform.d/plugin-cache"' >~/.terraformrc
-          mkdir --parents ~/.terraform.d/plugin-cache
+          sudo chmod +x ./scripts/terraformConfig.sh
+          ./scripts/terraformConfig.sh
+        shell: bash
 
       - name: Cache Terraform
         id: cache_terraform

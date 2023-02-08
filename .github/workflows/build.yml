@@ -19,9 +19,12 @@ jobs:
         uses: actions/checkout@v3
       
       - name: Config Terraform plugin cache
+        env:
+          TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
         run: |
-          echo 'plugin_cache_dir="$HOME/.terraform.d/plugin-cache"' >~/.terraformrc
-          mkdir --parents ~/.terraform.d/plugin-cache
+          sudo chmod +x ./scripts/terraformConfig.sh
+          ./scripts/terraformConfig.sh
+        shell: bash
 
       - name: Cache Terraform
         id: cache_terraform
@@ -37,7 +40,6 @@ jobs:
         uses: hashicorp/setup-terraform@v2.0.3
         with:
           cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
-          terraform_wrapper: false
 
       - name: Properly format the code
         id: fmt
