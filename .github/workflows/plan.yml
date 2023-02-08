@@ -29,8 +29,9 @@ jobs:
 
       - name: Config Terraform plugin cache
         run: |
-          echo 'plugin_cache_dir="$HOME/.terraform.d/plugin-cache"' >~/.terraformrc
-          mkdir --parents ~/.terraform.d/plugin-cache
+          sudo chmod +x ./scripts/terraformConfig.sh
+          ./scripts/terraformConfig.sh
+        shell: bash
 
       - name: Cache Terraform
         id: cache_terraform
@@ -53,6 +54,7 @@ jobs:
         
       - name: Init the terraform
         id: init
+        if: steps.cache_terraform.outputs.cache-hit != 'true'
         run: terraform init
         
       - name: Plan the Terraform configuration
